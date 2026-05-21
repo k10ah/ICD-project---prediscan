@@ -1,1 +1,3 @@
-# ICD-project---prediscan
+- classify diseases
+- analyze patient conditions
+- build a ML Pipeline
