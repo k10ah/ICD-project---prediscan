@@ -1,0 +1,11 @@
+torch>=2.2.0
+transformers>=4.53.2
+accelerate
+sentencepiece
+datasets
+scikit-learn
+pandas
+numpy
+joblib
+tqdm
+matplotlib
