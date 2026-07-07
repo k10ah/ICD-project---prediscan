@@ -1,0 +1,17 @@
+The trained model files are larger than GitHub's file size limit.
+
+Download the following files from Google Drive:
+
+1. best_model_state.pt
+2. pytorch_model.bin
+
+Google Drive Link:
+https://drive.google.com/drive/folders/1KRm_nku3tiglp87Nio9EDlrUyWKei8sk?usp=drive_link
+
+After downloading:
+
+Place best_model_state.pt inside:
+model_files/
+
+Place pytorch_model.bin inside:
+best_model/
