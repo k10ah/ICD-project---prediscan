@@ -1,78 +1,226 @@
-## Project Evolution
+# AI-Based Multi-Label ICD Code Prediction System for Healthcare Insurance Claim Processing
 
-### Version 1: Disease Category Prediction
+## Project Overview
 
-Objective:
-Predict broad disease categories from clinical descriptions.
+This project is an AI-powered healthcare coding system developed as a Final Year Biomedical Engineering project in collaboration with Prediscan.
 
-Classes:
-78 Categories
-
-Examples:
-
-* Cardiovascular Disease
-* Cancer
-* Respiratory Disease
-* Digestive Disease
-* Infectious Disease
-
-This task is a coarse-grained classification problem and achieved higher accuracy due to fewer target classes.
+The system predicts multiple ICD-10 diagnosis codes from clinical notes using Microsoft's **PubMedBERT** model and assists medical coders by providing Top-5 ICD recommendations, confidence scores, and clinically relevant ICD combinations for insurance claim processing.
 
 ---
 
-### Version 2: Exact ICD Code Prediction
+## Features
 
-Objective:
-Predict the exact ICD code used during medical insurance claim processing.
-
-Dataset:
-
-* Records Used: 14,492
-* ICD Classes: 878
-
-Examples:
-
-Clinical Text:
-"Persistent hyperglycemia with elevated HbA1c"
-
-Possible ICD Codes:
-
-* E11.9
-* E11.65
-* E10.9
-* R73.9
-
-Unlike category prediction, the model must identify the precise ICD code among 878 possible classes.
+- Multi-label ICD-10 code prediction
+- PubMedBERT-based Biomedical NLP
+- Top-3 & Top-5 ICD Recommendations
+- ICD Combination Recommendation Engine
+- Insurance Claim Workflow
+- Confidence Score for every prediction
+- Multi-label Classification (878 ICD Labels)
+- Google Colab compatible
+- Resume checkpoint support
+- Mixed Precision Training
+- Layer-wise Learning Rate Decay (LLRD)
+- Exponential Moving Average (EMA)
+- Early Stopping
+- Automatic Best Model Saving
 
 ---
 
-## Current Best Results
+## Dataset
 
-Model:
-LinearSVC + TF-IDF + Structured Features
-
-Performance:
-
-* Accuracy: 39.46%
-* Top-3 Accuracy: 55.47%
-* Top-5 Accuracy: 63.61%
+- Clinical Records : 23,792
+- ICD Labels : 878
+- Task : Multi-label ICD Prediction
 
 ---
 
-## Why Accuracy Appears Lower
+## Technologies Used
 
-The previous category prediction model classified a small number of broad disease groups.
+### Programming Language
+- Python
 
-The current system performs exact ICD prediction across 878 classes, making the problem significantly more difficult.
+### Deep Learning
+- PyTorch
+- Hugging Face Transformers
+- PubMedBERT
 
-Therefore, a 39.46% exact ICD prediction accuracy represents a substantially more challenging task than category classification.
+### Machine Learning
+- Scikit-learn
+- Pandas
+- NumPy
+
+### Development Tools
+- Google Colab
+- Google Drive
+- GitHub
 
 ---
 
-## Future Work
+## Project Structure
 
-* PubMedBERT
-* ClinicalBERT
-* Fine-Tuned Transformer Models
-* Top-K ICD Recommendation System
-* Real-Time Insurance Claim Assistance
+```
+ICD-project---prediscan/
+│
+├── README.md
+├── requirements.txt
+├── demo.py
+├── icdmf.py
+├── sample_input.txt
+├── model_download.txt
+│
+├── tokenizer/
+│   ├── tokenizer.json
+│   ├── tokenizer_config.json
+│   ├── special_tokens_map.json
+│   └── vocab.txt
+│
+├── best_model/
+│   └── config.json
+│
+└── model_files/
+    ├── mlb.pkl
+    └── combo_engine.pkl
+```
+
+---
+
+## Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/Sasivarman1108/ICD-project---prediscan.git
+```
+
+Move into the project
+
+```bash
+cd ICD-project---prediscan
+```
+
+Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## Download Trained Model
+
+The trained model exceeds GitHub's file size limit.
+
+Please download the model files from the Google Drive link provided below.
+
+Google Drive:
+
+https://drive.google.com/drive/folders/1buyxwKAhGArglBD-Z_ay83nCw89tAC4s?usp=drive_link
+
+Download the following files:
+
+- best_model_state.pt
+- pytorch_model.bin
+
+Place them as follows:
+
+```
+best_model_state.pt
+↓
+model_files/
+
+pytorch_model.bin
+↓
+best_model/
+```
+
+---
+
+## Running the Demo
+
+Run
+
+```bash
+python demo.py
+```
+
+or in Google Colab
+
+```python
+!python demo.py
+```
+
+---
+
+## Example Clinical Note
+
+```
+Patient is a 60-year-old male with Type 2 Diabetes Mellitus, Hypertension, Chronic Kidney Disease Stage 3, and Hyperlipidemia. He complains of fatigue, increased thirst, frequent urination, and bilateral pedal edema.
+```
+
+---
+
+## Example Output
+
+```
+Predicted ICD Codes
+
+E11
+N18
+I10
+
+Top-5 Recommendations
+
+E11
+N18
+I10
+I12
+E78
+
+Combination Recommendation
+
+E11 + N18
+
+Insurance Claim Workflow
+
+Medical Coder Review
+```
+
+---
+
+## Model Performance
+
+| Metric | Value |
+|---------|------:|
+| ICD Labels | 878 |
+| Dataset Size | 23,792 |
+| Micro F1 | 0.165 |
+| Macro F1 | 0.223 |
+| Top-3 Accuracy | 59.9% |
+| Top-5 Accuracy | 62.6% |
+| Hamming Loss | 0.015 |
+
+---
+
+## AI Workflow
+
+```
+Clinical Note
+        │
+        ▼
+PubMedBERT
+        │
+        ▼
+Multi-label ICD Prediction
+        │
+        ▼
+Top-5 ICD Recommendation
+        │
+        ▼
+Combination Recommendation
+        │
+        ▼
+Medical Coder Review
+        │
+        ▼
+Insurance Claim Processing
